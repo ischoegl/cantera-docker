@@ -14,7 +14,7 @@ $ docker build -t cantera-src .
 $ cd ..
 ```
 
-Build second layer for testing
+Build second layer for testing (avoiding container with root privileges)
 
 ```
 $ cd cantera-testing

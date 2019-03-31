@@ -12,20 +12,23 @@ RUN apt-get update && apt-get install -y \
 	cython python-dev python-numpy python-numpy-dev python-setuptools \
 	python3 python3-dev \
 	cython3 python3-numpy python3-numpy-dev python3-setuptools \
-	libboost-dev 
+	libboost-dev \
+	python3-pip
 
 WORKDIR /src/
 
 # clone cantera repository
 RUN git clone https://github.com/Cantera/cantera.git
+RUN cd cantera && git checkout v2.4.0
 
-# run scons
-RUN cd cantera && scons build python_cmd=python3
+## run scons
+RUN cd cantera && scons build python_cmd=/usr/bin/python3
 RUN cd cantera && scons test
 RUN cd cantera && scons install
 RUN cd cantera && scons clean
 
 # finish installation
 RUN echo alias python=python3 >> ~/.bashrc
+RUN echo alias pip=pip3 >> ~/.bashrc
 RUN echo source /usr/local/bin/setup_cantera >> ~/.bashrc
 

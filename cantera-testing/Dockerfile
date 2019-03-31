@@ -13,6 +13,7 @@ WORKDIR /home/ctuser/
 
 # finish installation
 RUN echo alias python=python3 >> ~/.bashrc
+RUN echo alias pip=pip3 >> ~/.bashrc
 RUN echo source /usr/local/bin/setup_cantera >> ~/.bashrc
 
 ## link python example folder
