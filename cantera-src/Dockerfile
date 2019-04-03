@@ -16,10 +16,8 @@ RUN cd cantera && scons test
 RUN cd cantera && scons install
 RUN cd cantera && scons clean
 
-=======
 ## finish installation
 #RUN echo alias python=python3 >> ~/.bashrc
 #RUN echo alias pip=pip3 >> ~/.bashrc
-#RUN echo source /usr/local/bin/setup_cantera >> ~/.bashrc
->>>>>>> Stashed changes
+RUN echo source /usr/local/bin/setup_cantera >> ~/.bashrc
 
