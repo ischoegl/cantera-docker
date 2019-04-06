@@ -13,7 +13,9 @@ RUN apt-get update && apt-get install -y \
 	python3 python3-dev \
 	cython3 python3-numpy python3-numpy-dev python3-setuptools \
 	python3-pip \
-	libboost-dev 
+	libboost-dev \
+	valgrind \
+	ipython3
 
 # finish installation
 RUN echo alias python=python3 >> ~/.bashrc
