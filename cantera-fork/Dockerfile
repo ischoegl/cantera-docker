@@ -7,7 +7,8 @@ COPY cantera.tar.gz /src/
 RUN tar xvzf cantera.tar.gz
 
 # # run scons
-RUN cd cantera && scons build
+RUN cd cantera && scons build python_cmd=python3
+#RUN cd cantera && scons build
 RUN cd cantera && scons test
 RUN cd cantera && scons install
 

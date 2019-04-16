@@ -11,8 +11,8 @@ RUN cd cantera && git checkout v2.4.0
 #RUN cd cantera && git apply cantera.patch
 
 # run scons
-#RUN cd cantera && scons build python_cmd=python3
-RUN cd cantera && scons build
+RUN cd cantera && scons build python_cmd=python3
+#RUN cd cantera && scons build
 RUN cd cantera && scons test
 RUN cd cantera && scons install
 
