@@ -43,6 +43,25 @@ ctuser@<container_ID>:~$ cp .python-examples/surface_chemistry/catalytic_combust
 ctuser@<container_ID>:~$ python catalytic_combustion.py
 ```
 
+## Build Code from Fork
+
+Make sure repo is up to date; then tar the local clone of the cantera fork.
+
+```
+$ tar -cvzf cantera.tar.gz cantera
+$ mv cantera.tar.gz <path-to-cantera-docker>/cantera-fork/
+```
+
+Build docker image that compiles cantera from source (i.e. this will take a while).
+
+```
+$ cd cantera-fork
+$ docker build -t cantera-fork .
+$ cd ..
+```
+
+
+
 ## Alternatives
 
  * [wmichalak/canteracontainer](https://github.com/wmichalak/canteracontainer): conda cantera container
