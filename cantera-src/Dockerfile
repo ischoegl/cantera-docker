@@ -6,7 +6,7 @@ WORKDIR /src/
 
 # clone cantera repository
 RUN git clone https://github.com/Cantera/cantera.git
-RUN cd cantera && git checkout v2.4.0
+#RUN cd cantera && git checkout v2.4.0
 #COPY ./cantera.patch /src/cantera/
 #RUN cd cantera && git apply cantera.patch
 
