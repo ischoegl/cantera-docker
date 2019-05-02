@@ -56,9 +56,9 @@ Make sure that gui is enabled (see below), and start a container
 
 ```
 $ cd <path-to-cantera-repo>
-$ docker run -it --name ct-fork --mount type=bind,source="$(pwd)",target=/src 
-                 --net=host --env="DISPLAY" --volume="$HOME/.Xauthority:/root/.Xauthority:rw" 
-				 --user=$(id -u):$(id -g) cantera-fork
+$ docker run -it --name ct-fork --mount type=bind,source="$(pwd)",target=/src \
+                 --net=host --env="DISPLAY" --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
+                 --user=$(id -u):$(id -g) cantera-fork
 ```
 
 While the container is running, set a root password (using a _separate_ terminal)
@@ -80,7 +80,7 @@ $ su
 # scons install
 ```
 
-### Enabling GUI
+### Enabling GUI Display
 
 A quick example for a running GUI, based on [this](https://medium.com/@SaravSun/running-gui-applications-inside-docker-containers-83d65c0db110)
 
@@ -98,10 +98,11 @@ $ id -u
 
 Then start a container using:
 ```
-$ docker run --net=host --env="DISPLAY" --volume="$HOME/.Xauthority:/root/.Xauthority:rw" --user=$(id -u):$(id -g) gui-app
+$ docker run --net=host --env="DISPLAY" --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
+             --user=$(id -u):$(id -g) gui-app
 ```
 
-### Share Local Folder with Docker
+### Share a Local Folder with Docker
 
 Start docker container, using a bind mount to the local folder
 
