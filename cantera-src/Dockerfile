@@ -4,6 +4,8 @@ MAINTAINER "Ingmar Schoegl <ischoegl@gmail.com>"
 #
 WORKDIR /src/
 
+RUN apt-get update -y
+
 # clone cantera repository
 RUN git clone https://github.com/Cantera/cantera.git
 #RUN cd cantera && git checkout v2.4.0
