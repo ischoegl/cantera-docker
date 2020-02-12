@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
         cython python-dev python-numpy python-numpy-dev python-setuptools \
         python3 python3-dev \
         cython3 python3-numpy python3-numpy-dev python3-setuptools \
-        python3-pip \
+        python3-pip python3-ruamel.yaml \
         libboost-dev libblas-dev liblapack-dev \
         valgrind \
         ipython3 \
