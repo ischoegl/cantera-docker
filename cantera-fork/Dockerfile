@@ -2,9 +2,12 @@
 FROM ubuntu-toolchain:latest
 MAINTAINER "Ingmar Schoegl <ischoegl@gmail.com>"
 
+ARG USER_ID
+ARG GROUP_ID
+
 # add user
-RUN groupadd -g 1000 docker
-RUN useradd -u 1000 -g docker docker
+RUN addgroup --gid $GROUP_ID docker
+RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID docker
 RUN mkdir -p /home/docker && chown docker:docker /home/docker
 USER docker
 
@@ -15,4 +18,4 @@ WORKDIR /home/docker
 RUN echo alias python=python3 >> /home/docker/.bashrc
 RUN echo alias pip=pip3 >> /home/docker/.bashrc
 RUN echo alias ipython=ipython3 >> /home/docker/.bashrc
-RUN echo source /usr/local/bin/setup_cantera >> /home/docker/.bashrc
+#RUN echo source /usr/local/bin/setup_cantera >> /home/docker/.bashrc

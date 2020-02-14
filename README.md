@@ -49,16 +49,16 @@ Build the image
 
 ```
 $ cd cantera-fork
-$ docker build -t cantera-fork .
+$ docker build -t cantera-fork --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) .
 ```
 
 Make sure that gui is enabled (see below), and start a container
 
 ```
 $ cd <path-to-cantera-repo>
-$ docker run -it --name ct-fork --mount type=bind,source="$(pwd)",target=/src \
+$ docker run -it --name ct-fork --mount "type=bind,src=$(pwd),dst=/src" \
                  --net=host --env="DISPLAY" --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
-                 --user=$(id -u):$(id -g) cantera-fork
+                 --workdir /src cantera-fork
 ```
 
 While the container is running, set a root password (using a _separate_ terminal)
@@ -121,3 +121,4 @@ $ docker run -it --name <container_name> --mount type=bind,source="$(pwd)",targe
  * Intro to Docker: [Docker tutorial series](https://rominirani.com/docker-tutorial-series-a7e6ff90a023)
  * Privileges: [Processes in Containers ... Not Run As Root](https://medium.com/@mccode/processes-in-containers-should-not-run-as-root-2feae3f0df3b)
  * Layers: [Digging into Docker layers](https://medium.com/@jessgreb01/digging-into-docker-layers-c22f948ed612)
+ * Permissions: [shared permissions](https://vsupalov.com/docker-shared-permissions/)
