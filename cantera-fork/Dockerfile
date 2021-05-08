@@ -18,4 +18,5 @@ WORKDIR /home/docker
 RUN echo alias python=python3 >> /home/docker/.bashrc
 RUN echo alias pip=pip3 >> /home/docker/.bashrc
 RUN echo alias ipython=ipython3 >> /home/docker/.bashrc
+RUN echo alias scons3="/usr/bin/env python3 $(which scons)" >> /home/docker/.bashrc
 #RUN echo source /usr/local/bin/setup_cantera >> /home/docker/.bashrc
