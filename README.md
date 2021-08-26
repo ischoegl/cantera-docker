@@ -61,11 +61,12 @@ $ docker run -it --name ct-fork --mount "type=bind,src=$(pwd),dst=/src" \
                  --workdir /src cantera-fork
 ```
 
-While the container is running, set a root password (using a _separate_ terminal)
+While the container is running, set a password for the `docker` user (using a _separate_ terminal)
 
 ```
 $ docker exec -u 0 -it ct-fork bash
-# passwd
+# passwd docker # <-- set password for docker
+# usermod -aG sudo docker # <-- add docker to sudoers list
 ...
 # exit
 ```
@@ -76,11 +77,12 @@ Inside the container started with `docker run ...`, compile cantera
 $ cd /src
 $ scons build python_cmd=python3
 $ scons test
-$ su
-# scons install
+$ sudo scons install
 ```
 
 ### Enabling GUI Display
+
+*TODO: this no longer works*
 
 A quick example for a running GUI, based on [this](https://medium.com/@SaravSun/running-gui-applications-inside-docker-containers-83d65c0db110)
 

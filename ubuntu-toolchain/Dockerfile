@@ -1,7 +1,9 @@
 # Ubuntu 18.04 LTS linux is used for this project
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 MAINTAINER "Ingmar Schoegl <ischoegl@gmail.com>"
 #
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y \
         build-essential \
         cmake scons \
@@ -18,15 +20,12 @@ RUN apt-get update && apt-get install -y \
         python3-scipy \
         gfortran
 
+RUN apt-get install -y python3-matplotlib
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-matplotlib
+RUN apt-get install -y sudo
 
 # finish installation
-RUN echo alias python=python3 >> ~/.bashrc
-RUN echo alias pip=pip3 >> ~/.bashrc
-RUN echo alias ipython=ipython3 >> ~/.bashrc
+#RUN echo alias python=python3 >> ~/.bashrc
 
 # update pip
-RUN pip3 install --upgrade pip
-#RUN pip3 install matplotlib
-#RUN pip3 install scipy
+RUN pip install --upgrade pip
