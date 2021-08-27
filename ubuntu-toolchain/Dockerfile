@@ -29,3 +29,4 @@ RUN apt-get install -y sudo
 
 # update pip
 RUN pip install --upgrade pip
+RUN pip install pytest h5py
