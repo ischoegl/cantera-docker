@@ -4,29 +4,13 @@ MAINTAINER "Ingmar Schoegl <ischoegl@gmail.com>"
 #
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Install Apt dependencies
 RUN apt-get update && apt-get install -y \
-        build-essential \
-        cmake scons \
-        git wget \
-        csh \
-        nano \
-        cython python-dev python-numpy python-numpy-dev python-setuptools \
-        python3 python3-dev \
-        cython3 python3-numpy python3-numpy-dev python3-setuptools \
-        python3-pip python3-ruamel.yaml \
-        libboost-dev libblas-dev liblapack-dev \
-        valgrind \
-        ipython3 \
-        python3-scipy \
-        gfortran
+        libboost-dev gfortran \
+    csh sudo git nano
 
-RUN apt-get install -y python3-matplotlib
-
-RUN apt-get install -y sudo
+RUN apt-get install -y \
+        python3 python3-pip build-essential
 
 # finish installation
-#RUN echo alias python=python3 >> ~/.bashrc
-
-# update pip
-RUN pip install --upgrade pip
-RUN pip install pytest h5py
+RUN echo alias python=python3 >> ~/.bashrc
