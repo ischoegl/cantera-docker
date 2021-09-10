@@ -7,7 +7,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Install Apt dependencies
 RUN apt-get update && apt-get install -y \
         libboost-dev gfortran \
-    csh sudo git nano
+        software-properties-common \
+        csh sudo git nano
 
 RUN apt-get install -y \
         python3 python3-pip build-essential
