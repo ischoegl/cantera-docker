@@ -17,6 +17,7 @@ WORKDIR /home/docker
 RUN python3 -m pip install --no-warn-script-location --upgrade pip
 RUN python3 -m pip install --no-warn-script-location setuptools wheel
 RUN python3 -m pip install --no-warn-script-location ruamel.yaml scons numpy cython h5py pandas pytest ipython scipy
+RUN python3 -m pip install --no-warn-script-location sphinx sphinxcontrib-katex sphinxcontrib-matlabdomain sphinxcontrib-doxylink
 
 # finish installation
 RUN echo alias python=python3 >> /home/docker/.bashrc
