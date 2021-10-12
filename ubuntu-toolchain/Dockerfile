@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get install -y \
         python3 python3-pip build-essential \
-        software-properties-common
+        software-properties-common \
+        doxygen graphviz
 
 # finish installation
 RUN echo alias python=python3 >> ~/.bashrc
