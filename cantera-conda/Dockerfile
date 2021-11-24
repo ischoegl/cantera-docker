@@ -4,10 +4,14 @@ FROM ubuntu:20.04
 
 SHELL [ "/bin/bash", "--login", "-c" ]
 
-ARG USER_ID
-ARG GROUP_ID
-ENV USER docker
+ARG uid=1000
+ARG gid=100
+ENV USER cantera
 ENV HOME /home/${USER}
+ENV UID ${uid}
+ENV GID ${gid}
+ENV SUNDIALS_VERSION 5.7
+ENV PYTHON_VERSION 3.8
 
 RUN apt-get update
 
@@ -18,18 +22,21 @@ RUN apt-get update && apt-get install -y \
 
 RUN rm -rf /var/lib/apt/lists/*
 
+# add group (if it doesn't exist)
+RUN if [ "$(getent group ${GID})" ]; \
+    then echo "Group exists"; \
+    else addgroup --gid ${GID} docker; \
+    fi
+
 # add user
-RUN addgroup --gid ${GROUP_ID} docker
 RUN adduser --disabled-password \
     --gecos "Non-root user" \
-    --uid ${USER_ID} \
-    --gid ${GROUP_ID} \
+    --uid ${UID} \
+    --gid ${GID} \
     --home ${HOME} \
     ${USER}
 
 USER ${USER}
-
-RUN pwd
 
 # install miniconda
 ENV CONDA_DIR ${HOME}/miniconda3
@@ -52,23 +59,16 @@ RUN conda init bash
 # install mamba
 RUN conda install -c conda-forge -q -y mamba
 
-# install dependencies (including sundials 5.7}
+# install dependencies
 RUN mamba install -c conda-forge -q -y \
-    sundials=5.7 \
-    scons numpy ruamel.yaml \
+    python=${PYTHON_VERSION} \
+    sundials=${SUNDIALS_VERSION} \
+    scons numpy ruamel.yaml cython \
     boost-cpp fmt eigen yaml-cpp h5py pandas libgomp openblas \
     ipython pip
-
-# Upgrade pip & install Python dependencies
-RUN python3 -m pip install --no-warn-script-location --upgrade pip
-
-# pre-release version of Cython
-RUN python3 -m pip install --no-warn-script-location \
-    https://github.com/cython/cython/archive/master.zip \
-    --install-option='--no-cython-compile'
 
 WORKDIR /home/docker
 
 # finish installation
-#RUN echo alias python=python3 >> /home/docker/.bashrc
+RUN echo alias python=python3 >> ${HOME}/.bashrc
 #RUN echo export PATH="/home/docker/.local/bin:${PATH}" >> /home/docker/.bashrc
