@@ -65,9 +65,9 @@ RUN mamba install -c conda-forge -q -y \
     sundials=${SUNDIALS_VERSION} \
     scons numpy ruamel.yaml cython \
     boost-cpp fmt eigen yaml-cpp h5py pandas libgomp openblas \
-    ipython pip
+    ipython pip pytest
 
-WORKDIR /home/docker
+WORKDIR ${HOME}
 
 # finish installation
 RUN echo alias python=python3 >> ${HOME}/.bashrc

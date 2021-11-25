@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 RUN python3 -m pip install --no-warn-script-location --upgrade pip setuptools wheel
 
 # Install Python dependencies
-RUN python3 -m pip install --no-warn-script-location ruamel.yaml scons numpy h5py pandas ipython;
+RUN python3 -m pip install --no-warn-script-location ruamel.yaml scons numpy h5py pandas ipython pytest;
 RUN python3 -m pip install --no-warn-script-location \
     https://github.com/cython/cython/archive/master.zip --install-option='--no-cython-compile';
 
@@ -39,8 +39,10 @@ RUN adduser --disabled-password \
     --home ${HOME} \
     ${USER}
 
+RUN chown ${USER}:docker ${HOME}
+
 USER ${USER}
 
-WORKDIR /home/docker
+WORKDIR ${HOME}
 
 RUN echo alias python=python3 >> ${HOME}/.bashrc
