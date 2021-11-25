@@ -1,6 +1,6 @@
 # cantera-docker
 
-Container compiles cantera from source (using separate layers for tool chain, source compilation and testing). 
+Container compiles cantera from source (using separate layers for tool chain, source compilation and testing).
 
 The workflow was tested on a [Docker CE](https://docs.docker.com/install/) installation.
 
@@ -9,7 +9,7 @@ The workflow was tested on a [Docker CE](https://docs.docker.com/install/) insta
 Build docker image with tool chain (ubuntu + buildessentials, etc.).
 
 ```
-$ cd ubuntu-toolchain 
+$ cd ubuntu-toolchain
 $ docker build -t ubuntu-toolchain .
 $ cd ..
 ```
@@ -17,7 +17,7 @@ $ cd ..
 Build docker image that compiles cantera from source (i.e. this will take a while).
 
 ```
-$ cd cantera-src 
+$ cd cantera-src
 $ docker build -t cantera-src .
 $ cd ..
 ```
@@ -41,43 +41,6 @@ Verify that everything works
 ```
 ctuser@<container_ID>:~$ cp .python-examples/surface_chemistry/catalytic_combustion.py .
 ctuser@<container_ID>:~$ python catalytic_combustion.py
-```
-
-### Forked Cantera
-
-Build the image
-
-```
-$ cd cantera-fork
-$ docker build -t cantera-fork --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) .
-```
-
-Make sure that gui is enabled (see below), and start a container
-
-```
-$ cd <path-to-cantera-repo>
-$ docker run -it --name ct-fork --mount "type=bind,src=$(pwd),dst=/src" \
-                 --net=host --env="DISPLAY" --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
-                 --workdir /src cantera-fork
-```
-
-While the container is running, set a password for the `docker` user (using a _separate_ terminal)
-
-```
-$ docker exec -u 0 -it ct-fork bash
-# passwd docker # <-- set password for docker
-# usermod -aG sudo docker # <-- add docker to sudoers list
-...
-# exit
-```
-
-Inside the container started with `docker run ...`, compile cantera
-
-```
-$ cd /src
-$ scons build python_cmd=python3
-$ scons test
-$ sudo scons install
 ```
 
 ### Enabling GUI Display
